@@ -1,0 +1,42 @@
+class ExpenseTracker:
+    def __init__(self):
+        self.expenses = {}
+
+    def add_expense(self, category, amount):
+        if category in self.expenses:
+            self.expenses[category] += amount
+        else:
+            self.expenses[category] = amount
+
+    def generate_report(self):
+        total_expenses = sum(self.expenses.values())
+        print("Expense Report:")
+        print("-" * 20)
+        for category, amount in self.expenses.items():
+            print(f"{category}: ₹{amount}")
+        print("-" * 20)
+        print(f"Total Expenses: ₹{total_expenses}")
+
+    def track_expenses(self):
+        print("Welcome to the Expense Tracker!")
+        print("Enter 'quit' to exit.")
+
+        while True:
+            category = input("Enter expense category: ").strip().lower()
+            if category == 'quit':
+                break
+
+            try:
+                amount = float(input("Enter expense amount: "))
+            except ValueError:
+                print("Invalid input. Please enter a valid amount.")
+                continue
+
+            self.add_expense(category, amount)
+
+        self.generate_report()
+
+
+if __name__ == "__main__":
+    tracker = ExpenseTracker()
+    tracker.track_expenses()
